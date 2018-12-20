@@ -1,0 +1,56 @@
+#默认使用配置
+spring:
+  profiles:
+    active: dev
+  datasource:
+#    The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+#    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maxLifetime: 1765000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+      maximumPoolSize: 15 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+      auto-commit: true
+      minimum-idle: 5
+      idle-timeout: 30000
+      pool-name: hikariDataSource
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+    type: com.zaxxer.hikari.HikariDataSource
+mybatis:
+  typeAliasesPackage: com.zhh.model
+  mapperLocations: classpath*:mappers/*.xml
+#  mapperLocations: classpath*:com/zhh/dao/mapper/*.xml
+
+---
+# 开发环境配置
+spring:
+  profiles: dev
+  datasource:
+#      jdbc-url: jdbc:mysql://47.106.137.210:3306/db_news?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+      url: jdbc:mysql://47.106.137.210:3306/db_news?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+      username: root
+      password: root
+#      username: ${jdbc.username}
+#      password: ${jdbc.password}
+
+
+---
+# 测试环境配置
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:mysql://192.168.0.13:3306/
+
+---
+# 生产环境配置
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://192.168.0.13:3306/
+#公共配置与profiles选择无关
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  config: classpath*:log4j.properties
+#  org.apache.ibatis.logging.stdout.StdOutImpl：这个是可以sql、参数、查询结果的
