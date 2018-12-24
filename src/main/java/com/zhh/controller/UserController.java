@@ -1,6 +1,5 @@
 package com.zhh.controller;
 
-import com.zhh.model.User;
 import com.zhh.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

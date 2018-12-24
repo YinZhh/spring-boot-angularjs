@@ -1,5 +1,9 @@
 package com.zhh.entity;
 
+/**
+ * @author yin.zhh
+ * spring boot 启动
+ */
 public class User {
 
     private Integer userId;

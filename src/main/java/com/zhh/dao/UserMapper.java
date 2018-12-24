@@ -6,20 +6,57 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+/**
+ * @author yin.zhh
+ * 用户相关mapper
+ */
 @Repository
 @Mapper
 public interface UserMapper {
 
+    /**
+     * 登录
+     *
+     * @param user 用户
+     * @return com.zhh.model.User
+     */
     User login(User user);
 
+    /**
+     * 用户ID查找
+     *
+     * @param id 用户id
+     * @return com.zhh.model.User
+     */
     User getUserById(int id);
 
+    /**
+     * 查找所有用户
+     *
+     * @return List<User>
+     */
     List<User> getAllUsers();
 
-    void addUser(User user);
+    /**
+     * 添加用户
+     *
+     * @param user 用户
+     * @return id
+     */
+    int addUser(User user);
 
-    void deleteUser(String userName);
+    /**
+     * 删除用户
+     *
+     * @param userName 用户名字
+     * @return id
+     */
+    int deleteUser(String userName);
 
-    void deleteAll();
+    /**
+     * 删除所有用户
+     *
+     * @return id
+     */
+    int deleteAll();
 }
