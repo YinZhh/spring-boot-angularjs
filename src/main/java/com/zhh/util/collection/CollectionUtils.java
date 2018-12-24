@@ -4,6 +4,7 @@ package com.zhh.util.collection;
 import com.zhh.util.object.ObjectUtils;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -100,12 +101,16 @@ public class CollectionUtils {
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < leng; i++) {
+            if (i == 0) {
+                sb.append("{");
+            }
             if (i != leng - 1) {
-                sb.append(arr[i]).append(",");
+                sb.append(arr[i]).append(", ");
             } else {
-                sb.append(arr[i]);
+                sb.append(arr[i]).append("}");
             }
         }
+
         return sb.toString();
     }
 
@@ -114,5 +119,8 @@ public class CollectionUtils {
         System.out.println(CollectionUtils.arrayToString(arr));
         quickSort(arr);
         System.out.println(CollectionUtils.arrayToString(arr));
+
+        boolean empty = isEmpty(new HashMap<String, ObjectUtils>());
+        System.out.println(empty);
     }
 }
