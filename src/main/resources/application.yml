@@ -1,7 +1,7 @@
 #默认使用配置
 spring:
   profiles:
-    active: dev
+    active: test
   datasource:
 #    The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
 #    driver-class-name: com.mysql.jdbc.Driver
@@ -38,7 +38,9 @@ spring:
 spring:
   profiles: test
   datasource:
-    url: jdbc:mysql://192.168.0.13:3306/
+    url: jdbc:mysql://47.106.137.210:3306/db_news?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    username: yin.zhh
+    password: 123456
 
 ---
 # 生产环境配置
@@ -48,9 +50,11 @@ spring:
     url: jdbc:mysql://192.168.0.13:3306/
 #公共配置与profiles选择无关
 
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#logging:
+#  config: classpath*:log4j.properties
 logging:
-  config: classpath*:log4j.properties
+  config: classpath:logback.xml
 #  org.apache.ibatis.logging.stdout.StdOutImpl：这个是可以sql、参数、查询结果的
