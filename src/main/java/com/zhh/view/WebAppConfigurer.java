@@ -24,6 +24,7 @@ public class WebAppConfigurer implements WebMvcConfigurer {
      * @param registry org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
      * @return void
      */
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
