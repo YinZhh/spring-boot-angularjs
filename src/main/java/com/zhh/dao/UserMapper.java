@@ -2,6 +2,7 @@ package com.zhh.dao;
 
 import com.zhh.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -59,4 +60,6 @@ public interface UserMapper {
      * @return id
      */
     int deleteAll();
+
+    int updateUserById(/*@Param("user")*/ User usero);
 }

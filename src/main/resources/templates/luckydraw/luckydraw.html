@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>幸运抽奖</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" href="/static/image/favicon.ico">
+    <!-- 加载通用样式 -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/luckydraw.css">
+
+</head>
+
+<body>
+<div class="container">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">向左</label>
+            <div class="col-sm-10">
+                <a href="javascript:" id="inputEmail3">←</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">向右</label>
+            <div class="col-sm-10">
+                <a href="javascript:" id="inputPassword3">→</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div id="div1">
+                    <ul>
+                        <li><img src="/static/image/1.jpg" alt=""></li>
+                        <li><img src="/static/image/2.jpg" alt=""></li>
+                        <li><img src="/static/image/3.jpg" alt=""></li>
+                        <li><img src="/static/image/4.jpg" alt=""></li>
+                        <div style="clear: none;"></div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" id="stopLucky">停止抽奖</button>
+                    <!--<button type="button" class="btn btn-default">Middle</button>-->
+                    <button type="button" class="btn btn-default" id="startLucky">开始抽奖</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!--<a href="javascript:">←</a>
+<a href="javascript:">→</a>-->
+<!--<div id="div1">
+    <ul>
+        <li><img src="/static/image/1.jpg" alt=""></li>
+        <li><img src="/static/image/2.jpg" alt=""></li>
+        <li><img src="/static/image/3.jpg" alt=""></li>
+        <li><img src="/static/image/4.jpg" alt=""></li>
+        <div style="clear: none;"></div>
+    </ul>
+</div>-->
+<!--<div>
+    <button>停止</button><button>开始</button>
+</div>-->
+
+<script type="text/javascript">
+    window.onload = function () {
+        let oDiv = document.getElementById('div1');
+        let oUl = oDiv.getElementsByTagName('ul')[0];
+        let aLi = oUl.getElementsByTagName('li');
+        //获取向右向左的箭头
+        let aA = document.getElementsByTagName('a');
+        let stopLucky = document.getElementById('stopLucky');
+        let startLucky = document.getElementById('startLucky');
+        let timer = null;
+        let iSpeed = 10;
+        let speed = 6; //30 数字越大速度越慢  30
+        //定义图片可以循环播放
+        oUl.innerHTML += oUl.innerHTML;
+        //定义外层ul的宽度，根据图片的个数和每个图片的宽度计算，保证总宽度是可调整的
+        oUl.style.width = aLi.length * aLi[0].offsetWidth + 'px';
+
+        function fnMove() {
+            //定义到边界的时候，实现无缝衔接
+            if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
+                oUl.style.left = 0;
+            } else if (oUl.offsetLeft > 0) {
+                oUl.style.left = -oUl.offsetWidth / 2 + 'px';
+            }
+            //定义图片的右边距随着速度不断不断增加，或减小，实现运动的效果
+            oUl.style.left = oUl.offsetLeft + iSpeed + 'px';
+        }
+
+        timer = setInterval(fnMove, speed);
+        aA[0].onclick = function () {
+            //按下左箭头，定义向左运动
+            iSpeed = -10;
+        };
+        aA[1].onclick = function () {
+            //按下右箭头，定义向右运动
+            iSpeed = 10;
+        };
+        oDiv.onmouseover = function () {
+            //鼠标移动到图片上，清除定时器，停止运动
+            clearInterval(timer);
+        };
+        oDiv.onmouseout = function () {
+            //鼠标移出，重新开启定时器，重新运动
+            timer = setInterval(fnMove, speed);
+        };
+        stopLucky.onclick = function () {
+            alert(timer);
+            clearInterval(timer);
+        };
+        startLucky.onclick = function () {
+            alert(timer);
+            timer = setInterval(fnMove, speed);
+        };
+    };
+
+</script>
+</body>
+
+
+</html>

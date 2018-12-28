@@ -11,11 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringBootAngularApplication {
 
     /**
+     * @param args args
+     * @return void
      * @description This's Method description
      * @author zhh_yin
      * @date 2018/12/22 17:26
-     * @param args args
-     * @return void
      */
     public static void main(String[] args) {
         SpringApplication.run(SpringBootAngularApplication.class, args);
